@@ -99,7 +99,8 @@ public class IntDList {
         back = new DNode(back, d, null);
         if (front == null) {
             front = back;
-        } else {
+        }
+        else {
             back.prev.next = back;
         }
     }
