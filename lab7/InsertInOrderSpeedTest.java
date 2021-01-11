@@ -2,6 +2,7 @@ import java.util.HashMap;
 import java.util.TreeMap;
 import java.io.IOException;
 import java.util.Scanner;
+import java.io.*;
 
 import edu.princeton.cs.algs4.Stopwatch;
 
@@ -30,6 +31,7 @@ public class InsertInOrderSpeedTest {
         do {
             System.out.print("\nEnter # strings to insert into the maps: ");
             int N = i.waitForPositiveInt(input);
+            System.out.println("# Strings: " + N);
             timeInOrderMap61B(new ULLMap<>(), N);
             timeInOrderMap61B(new BSTMap<>(), N);
             timeInOrderTreeMap(new TreeMap<>(), N);

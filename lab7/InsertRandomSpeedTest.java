@@ -1,8 +1,10 @@
+import java.io.FileWriter;
 import java.util.HashMap;
 import java.util.TreeMap;
 import java.io.IOException;
 import java.util.Scanner;
 import edu.princeton.cs.algs4.Stopwatch;
+import java.io.*;
 
 /** Performs a timing test on three different set implementations.
  *  @author Josh Hug
@@ -13,6 +15,7 @@ public class InsertRandomSpeedTest {
         Requests user input and performs tests of three different set
         implementations. ARGS is unused.
     */
+
     public static void main(String[] args) throws IOException {
         Scanner input = new Scanner(System.in);
 
@@ -23,14 +26,23 @@ public class InsertRandomSpeedTest {
         System.out.print("Please enter desired length of each string: ");
         int L = waitForPositiveInt(input);
 
+        PrintStream o = new PrintStream(new File("speedTestResults.txt"));
+        PrintStream console = System.out;
+        System.setOut(o);
+        System.out.println("InsertRandomSpeedTest: String Length = " + L);
+        System.setOut(console);
         String repeat = "y";
         do {
             System.out.print("\nEnter # strings to insert into the maps: ");
+            System.setOut(o);
             int N = waitForPositiveInt(input);
+            System.out.println("# Strings: " + N);
             timeRandomMap61B(new ULLMap<>(), N, L);
             timeRandomMap61B(new BSTMap<>(), N, L);
             timeRandomTreeMap(new TreeMap<>(), N, L);
+            System.out.println();
 
+            System.setOut(console);
             System.out.print("\nWould you like to try more timed-tests? (y/n)");
             repeat = input.nextLine();
         } while (!repeat.equalsIgnoreCase("n") && !repeat.equalsIgnoreCase("no"));
